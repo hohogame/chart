@@ -183,33 +183,25 @@
 
       G2.track(false);
 
-      function throttle(fun, delay) {
-        let last, deferTimer
+      function debounce(fun, delay) {
         return function (args) {
           let that = this
-          let _args = arguments
-          let now = +new Date()
-          if (last && now < last + delay) {
-            clearTimeout(deferTimer)
-            deferTimer = setTimeout(function () {
-              last = now
-              fun.apply(that, _args)
-            }, delay)
-          } else {
-            last = now
-            fun.apply(that, _args)
-          }
+          let _args = args
+          clearTimeout(fun.id)
+          fun.id = setTimeout(function () {
+            fun.call(that, _args)
+          }, delay)
         }
       }
 
-      var updateLegend = throttle(function (data) {
+      var updateLegend = debounce(function (data) {
         $volume.text(data.volumn);
         $ems.eq(0).text(data.min);
         $ems.eq(1).text(data.end);
         $ems.eq(2).text(data.start);
         $ems.eq(3).text(data.max);
         $headDate.html(data.timeTxt);
-      }, 500);
+      }, 200);
 
 
       function dateFtt(fmt, date) {
