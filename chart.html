@@ -181,6 +181,8 @@
         $volume = $("#volume"),
         $headDate = $(".head .date");
 
+      G2.track(false);
+
       function throttle(fun, delay) {
         let last, deferTimer
         return function (args) {
@@ -242,7 +244,7 @@
             weekeen = ['Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
           timeTxt = `<span>${weekeen[D]}</span><span>${dateFtt("MM/dd/yyyy hh:mm", date)}</span>`;
           if (dateType == "h") {
-            timeStr = d + "d" + (h > 9 ? h : '0' + h) + "h";
+            timeStr = (d > 9 ? d : '0' + d) + "'" + (h > 9 ? h : '0' + h);
           } else {
             timeStr = (h > 9 ? h : '0' + h) + ":" + (m > 9 ? m : '0' + m);
           }
@@ -310,7 +312,7 @@
               display: 'none'
             },
             showTitle: false,
-            itemTpl: '',
+            itemTpl: '<span></span>',
             crosshairs: {
               type: 'cross',
               style: {
