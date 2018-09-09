@@ -160,8 +160,8 @@
         </p>
       </div>
       <div class="time-tab" id="date-filter">
-        <span class="active" data-filter="1m">1M</span>
-        <span data-filter="30m">30M</span>
+        <span data-filter="1m">1M</span>
+        <span class="active" data-filter="30m">30M</span>
         <span data-filter="1h">1H</span>
       </div>
     </div>
@@ -383,7 +383,7 @@
         });
       }
 
-      function chartInit(filter = "1m") {
+      function chartInit(filter = "30m") {
         var url = `https://api.hohogame.io/bnapi/v1/klines?symbol=BTCUSDT&interval=${filter}&limit=40`,
           dateType = filter.substr(-1);
         getChartData(url, dateType);
@@ -395,7 +395,7 @@
         }, 10000);
       }
 
-      chartInit('1m');
+      chartInit('30m');
 
       $("#date-filter").on("click", "span", function (e) {
         var $this = $(this),
